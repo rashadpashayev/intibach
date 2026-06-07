@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intibach Creative Agency - Wake the Brand Within</title>
+    <title>Intibach Creative Agency - Brendinizi Oyadın!</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/dkY8zWq.png" />
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- SVG İkonlar için (Heroicons) -->
-    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* Pürüzsüz kaydırma */
+        /* Hamar sürüşmə */
         html {
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* iOS cihazlarda inersial sürüşməni aktiv edir */
         }
 
-        /* Ana font */
+        /* Əsas font */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #050505; /* Koyu bir arka plan */
+            background-color: #050505; /* Qaranlıq arxa fon */
             color: #f0f0f0;
         }
 
-        /* İstenen "Dissolve" (Çözünme/Geçiş) Efekti.
-          İki ana rengi (mor ve turuncu/kahverengi) kullanarak
-          geniş bir degrade arka planı yavaşça hareket ettirir.
-        */
+        /* "Dissolve" (Həllolma/Keçid) Effekti. */
         @keyframes dissolve {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -41,17 +37,15 @@
 
         .dissolve-bg {
             background: linear-gradient(270deg, #3e0cdf, #c37b09, #3e0cdf, #c37b09);
-            background-size: 400% 400%; /* Animasyon için degradeyi büyütür */
+            background-size: 400% 400%;
             animation: dissolve 16s ease infinite;
+            will-change: background-position;
         }
 
-        /* İstenen "Grenli" (Grainy) Doku.
-          Bu doku, tüm bölümlere uygulanır ve hafif bir retro/sanatsal his verir.
-          Tüm içeriğin üstünde, düşük opaklıkta bir desen olarak yer alır.
-        */
+        /* "Dənəvər" (Grainy) Tekstura. */
         .grainy {
             position: relative;
-            overflow: hidden; /* Sözde-öğeyi (pseudo-element) içeride tutar */
+            overflow: hidden;
         }
         
         .grainy::before {
@@ -61,27 +55,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Tek dosyada kalması için base64 ile kodlanmış küçük bir gürültü deseni */
             background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABlSURBVChTY2j49+8/AzMDIwMTU0YGgAAD+v/P/v2H4dnh4w8GBob////v379//Pz58+/fv/9iYGBgYGRgYPgBTAw/GGbg4/+Y3AyMDIyMDBkYGBgYGECAAQCvBgYGAgD82QAAAAD//wMAKbU/E2sVGXoAAAAASUVORK5CYII=');
-            opacity: 0.05; /* Dokunun yoğunluğu */
-            pointer-events: none; /* Üzerine tıklanmasını engeller */
-            z-index: 1; /* İçeriğin hemen üzerinde */
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        /* İçeriğin dokunun altında kalmamasını sağlar */
+        /* Məzmunun tekstura altında qalmaması üçün */
         .grainy > * {
             position: relative;
             z-index: 2;
         }
 
-        /* Navigasyon barı için bulanıklık efekti */
+        /* Naviqasiya paneli üçün dumanlılıq effekti */
         .backdrop-blur-custom {
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             background-color: rgba(5, 5, 5, 0.7);
+            will-change: backdrop-filter, background-color;
         }
 
-        /* Ana "Uyanış" animasyonu */
+        /* Əsas "Oyanış" animasiyası */
         @keyframes textFocusIn {
             0% {
                 filter: blur(12px);
@@ -109,7 +103,14 @@
         .fade-in-delay-1 { animation-delay: 0.3s; }
         .fade-in-delay-2 { animation-delay: 0.6s; }
 
-        /* Özel Buton Stilleri */
+        /* GPU Sürətləndirilməsi üçün Animasiya Edilən Elementlərə xüsusi sinif */
+        .fade-in, .text-focus-in, .group, .grid > div, h2 {
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+        }
+
+        /* Özəl Düymə Stilləri */
         .btn {
             @apply inline-block px-8 py-3 rounded-md text-base font-semibold transition-all duration-300 ease-in-out;
         }
@@ -126,7 +127,7 @@
             @apply bg-white text-black;
         }
         
-        /* Hizmet Kartı Hover Efekti */
+        /* Xidmət Kartı Hover Effekti */
         .service-card {
             @apply bg-gray-900 p-8 rounded-lg border-2 border-transparent transition-all duration-300;
         }
@@ -134,7 +135,7 @@
             @apply border-purple-600 transform -translate-y-2 shadow-xl shadow-purple-900/30;
         }
 
-        /* Portfolyo Kartı */
+        /* Portfoliokartı */
         .portfolio-card {
             @apply rounded-lg overflow-hidden bg-gray-900 shadow-lg transition-all duration-300;
         }
@@ -142,393 +143,348 @@
             @apply shadow-xl shadow-orange-900/30 transform -translate-y-2;
         }
     </style>
-
-
-
 </head>
-
-
 <body class="bg-black text-gray-100">
 
-    <!-- ===== HEADER / NAVIGATION ===== -->
+    <!-- ===== NAVİQASİYA PANALİ ===== -->
     <header id="header" class="fixed w-full top-0 left-0 z-50 backdrop-blur-custom transition-all duration-300">
-  <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-20 rounded-b-lg justify-between md:justify-between">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center py-4 sm:py-5 justify-between transition-all duration-300">
+            
+            <!-- Loqo şəkli silindi və yerinə premium şriftli "Intibach Creative" mətni əlavə edildi -->
+            <a id="logo-link" href="#home" class="flex items-center space-x-1 cursor-pointer select-none group">
+                <span class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white transition-colors duration-300 group-hover:text-gray-200">Intibach</span>
+                <span class="text-2xl sm:text-3xl font-light tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#3e0cdf] to-[#c37b09]">Creative</span>
+            </a>
 
-    <!-- Logo -->
-     <a id="logo" href="#home" class="flex items-center space-x-2 md:ml-0 ml-0 cursor-pointer">
-      <img src="https://i.imgur.com/PjA5LtQ.png" alt="İntibach Logo" class="h-29 w-auto md:h-50 lg:h-60" />
-    </a>
+            <!-- Desktop Menyu -->
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#home" class="text-gray-300 hover:text-white transition-colors">Ana Səhifə</a>
+                <a href="#about" class="text-gray-300 hover:text-white transition-colors">Haqqımızda</a>
+                <a href="#services" class="text-gray-300 hover:text-white transition-colors">Xidmətlər</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">İşlərimiz</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Əlaqə</a>
+            </div>
 
-    <!-- Desktop Menu -->
-    <div class="hidden md:flex space-x-8">
-      <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
-      <a href="#about" class="text-gray-300 hover:text-white transition-colors">About Us</a>
-      <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
-      <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">Work</a>
-      <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
-    </div>
+            <!-- Mobil Hamburger Menyu Düyməsi -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none z-50 p-2">
+                <svg id="menu-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg id="close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </nav>
 
-    <!-- Mobile Menu Button -->
-    
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden absolute top-0 left-0 w-full h-screen bg-black z-40">
-    <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-      <a href="#home" class="mobile-link text-gray-300 hover:text-white">Home</a>
-      <a href="#about" class="mobile-link text-gray-300 hover:text-white">About Us</a>
-      <a href="#services" class="mobile-link text-gray-300 hover:text-white">Services</a>
-      <a href="#portfolio" class="mobile-link text-gray-300 hover:text-white">Work</a>
-      <a href="#contact" class="mobile-link text-gray-300 hover:text-white">Contact</a>
-    </div>
-  </div>
-</header>
-<script>
-  const logo = document.getElementById("logo");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  logo.addEventListener("click", (e) => {
-    // Sadece mobilde çalışsın
-    if (window.innerWidth < 768) {
-      e.preventDefault();
-      mobileMenu.classList.toggle("hidden");
-    }
-  });
-
-  // Menü linkine tıklanınca menüyü kapat
-  document.querySelectorAll(".mobile-link").forEach(link => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.add("hidden");
-    });
-  });
-</script>
+        <!-- Mobil Menyu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-0 left-0 w-full h-screen bg-black z-40">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl font-semibold">
+                <a href="#home" class="mobile-link text-gray-300 hover:text-white">Ana Səhifə</a>
+                <a href="#about" class="mobile-link text-gray-300 hover:text-white">Haqqımızda</a>
+                <a href="#services" class="mobile-link text-gray-300 hover:text-white">Xidmətlər</a>
+                <a href="#portfolio" class="mobile-link text-gray-300 hover:text-white">İşlərimiz</a>
+                <a href="#contact" class="mobile-link text-gray-300 hover:text-white">Əlaqə</a>
+            </div>
+        </div>
+    </header>
 
     <main>
-        <!-- ===== 1. HOMEPAGE (HERO) ===== -->
+        <!-- ===== 1. ANA SƏHİFƏ (HERO) ===== -->
         <section id="home" class="h-screen min-h-[700px] flex items-center justify-center text-center p-4 dissolve-bg grainy">
-            <div class="relative z-10">
-                <!-- Slogan ve Başlık -->
+            <div class="relative z-10 px-4">
+                <!-- Azərbaycan Dilində Süar və Başlıq -->
                 <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold text-white leading-tight text-focus-in">
-                    Wake the Brand Within.
+                    Brendinizi Oyadın!
                 </h1>
                 <p class="mt-6 text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto fade-in fade-in-delay-1">
-                    Discover your brand's potential. Create your story with us.
+                    Brendinizin potensialını kəşf edin. Hekayənizi bizimlə yaradın.
                 </p>
                 
-                <!-- CTA Butonları -->
+                <!-- Keçid Düymələri -->
                 <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 fade-in fade-in-delay-2">
-                    <a href="#services" class="btn-primary">Explore Services</a>
-                    <a href="#contact" class="btn-secondary">Start a Project</a>
+                    <a href="#services" class="btn-primary">Xidmətləri Kəşf Et</a>
+                    <a href="#contact" class="btn-secondary">Əlaqəyə Keç</a>
                 </div>
             </div>
         </section>
 
-        <!-- ===== 2. ABOUT US ===== -->
-        <!-- ===== 2. ABOUT US ===== -->
-<section id="about" class="relative py-32 md:py-40 overflow-hidden">
-  <!-- 🌌 Arka Plan (Aynı efekt) -->
-  <div class="absolute inset-0 bg-gradient-to-br from-[#3e0cdf] via-[#2e0854] to-[#c37b09] opacity-90"></div>
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute w-[600px] h-[600px] bg-[#c37b09]/40 rounded-full blur-3xl bg-orb -top-32 -left-40"></div>
-    <div class="absolute w-[700px] h-[700px] bg-[#3e0cdf]/40 rounded-full blur-3xl bg-orb-slow bottom-20 right-0"></div>
-  </div>
-
-  <!-- 🌟 İçerik -->
-  <div class="relative z-10 container mx-auto px-6 lg:px-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-      <!-- Görsel Alanı -->
-      <div class="flex items-center justify-center p-12 rounded-2xl h-full min-h-[320px] border border-[#c37b09]/60 bg-white/5 backdrop-blur-md shadow-lg"
-           style="background-image: url('https://i.imgur.com/dkY8zWq.png'); background-size: cover; background-position: center;">
-      </div>
-
-      <!-- Metin Alanı -->
-      <div>
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
-          Creative Awakening.
-        </h2>
-        <p class="text-lg text-gray-200 mb-8 leading-relaxed">
-          Intibach Creative is a digital agency that helps brands discover their essence and unleash their full potential.
-          With our "Awakening" philosophy, we merge creativity and strategy to build unforgettable brands.
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          <div class="bg-white/10 p-6 rounded-xl border border-white/20 backdrop-blur-md hover:scale-105 transition-all duration-500">
-            <h3 class="text-2xl font-semibold text-[#c37b09] mb-2">Our Mission</h3>
-            <p class="text-gray-300">
-              To empower brands to forge deep connections with their audience by remembering who they are and what they stand for.
-            </p>
-          </div>
-
-          <div class="bg-white/10 p-6 rounded-xl border border-white/20 backdrop-blur-md hover:scale-105 transition-all duration-500">
-            <h3 class="text-2xl font-semibold text-[#3e0cdf] mb-2">Our Vision</h3>
-            <p class="text-gray-300">
-              To build brands that not only exist in the digital world but inspire and shape the future.
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-        <!-- ===== 3. OUR SERVICES ===== -->
-<section id="services" class="pt-40 pb-24 md:py-48 bg-black grainy">
-
-  <!-- 🌌 Arka Plan (Gradient + Blur + Animasyon) -->
-  <!-- 🌌 Arka Plan (Gradient + Blur + Animasyon) -->
-<div class="absolute inset-0 bg-gradient-to-br from-[#3e0cdf] via-[#2e0854] to-[#c37b09] opacity-90"></div>
-<div class="absolute inset-0 overflow-hidden">
-  <div class="absolute w-[600px] h-[600px] bg-[#c37b09]/40 rounded-full blur-3xl bg-orb -top-20 -left-40"></div>
-  <div class="absolute w-[700px] h-[700px] bg-[#3e0cdf]/40 rounded-full blur-3xl bg-orb-slow bottom-20 right-0"></div>
-</div>
-
-
-  <!-- 🌟 İçerik -->
-  <div class="relative z-10 container mx-auto px-6 lg:px-12">
-    <!-- Başlık -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-        The Art of Awakening Your Brand.
-      </h2>
-      <p class="text-lg text-gray-300">
-        We offer a complete suite of creative services designed to bring your brand's unique story to life.
-      </p>
-    </div>
-
-    <!-- Hizmet Kartları -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      <!-- Kart -->
-      <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#c37b09] transition-colors">
-          Brand Strategy & Identity
-        </h3>
-        <p class="text-gray-300">
-          We define your core message, voice, and visual identity to build a brand that resonates.
-        </p>
-      </div>
-
-      <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#3e0cdf] transition-colors">
-          Web Design & Development
-        </h3>
-        <p class="text-gray-300">
-          Creating stunning, user-centric websites that are both beautiful and functional.
-        </p>
-      </div>
-
-      <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#c37b09] transition-colors">
-          Digital Marketing & SMM
-        </h3>
-        <p class="text-gray-300">
-          Engaging your audience and driving growth through targeted digital campaigns.
-        </p>
-      </div>
-
-      <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#3e0cdf] transition-colors">
-          Content Creation & Copywriting
-        </h3>
-        <p class="text-gray-300">
-          Telling your brand's story with compelling copy, photography, and design.
-        </p>
-      </div>
-
-      <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#c37b09] transition-colors">
-          Video Production & Animation
-        </h3>
-        <p class="text-gray-300">
-          Bringing your vision to life with dynamic motion graphics and professional video.
-        </p>
-      </div>
-
-      <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
-        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#3e0cdf] transition-colors">
-          UI/UX & App Design
-        </h3>
-        <p class="text-gray-300">
-          Designing intuitive and delightful digital experiences for mobile and web.
-        </p>
-      </div>
-    </div>
-  </div>
-<style>
-  /* 🔮 Daha akıcı, yavaş degrade animasyonu */
-  @keyframes smoothMove {
-    0% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translate(40px, -60px) scale(1.1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.6;
-    }
-  }
-
-  .bg-orb {
-    animation: smoothMove 15s ease-in-out infinite;
-  }
-
-  .bg-orb-slow {
-    animation: smoothMove 25s ease-in-out infinite;
-  }
-</style>
-
-
-</section>
-
-
-
-        <!-- ===== 4. PORTFOLIO / WORK ===== -->
-<section id="portfolio" class="py-24 md:py-32 relative bg-gray-900 text-white" 
-         style="background-image: url('https://i.imgur.com/2LHK0YW.png'); background-size: cover; background-position: center; background-attachment: fixed;">
-    <div class="absolute inset-0 bg-black/70"></div> <!-- Koyu overlay -->
-    
-    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Başlık -->
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                Our Stories. Our Successes.
-            </h2>
-            <p class="text-lg text-gray-300">
-                Explore how we've awakened the inner power of brands in every project.
-            </p>
-        </div>
-        
-        <!-- Portfolyo Kartları -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <!-- Project Aura -->
-            <div>
-                <div class="h-64 rounded-lg overflow-hidden border border-[#c37b09]"
-                     style="background-image: url('https://i.imgur.com/dkY8zWq.png'); background-size: cover; background-position: center;">
-                </div>
-                <h3 class="text-2xl font-semibold mt-4">Project Aura</h3>
-                <p class="text-gray-300 mt-2">
-                    A complete brand identity and web platform for a next-gen tech startup.
-                </p>
-                <a href="#" class="text-[#3e0cdf] font-semibold inline-block mt-2 hover:underline">
-                    View Project →
-                </a>
+        <!-- ===== 2. HAQQIMIZDA ===== -->
+        <section id="about" class="relative py-32 md:py-40 overflow-hidden">
+            <!-- Arka Plan Qradiyent və Animasiyalı Dairələr -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#3e0cdf] via-[#2e0854] to-[#c37b09] opacity-90"></div>
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute w-[600px] h-[600px] bg-[#c37b09]/40 rounded-full blur-3xl bg-orb -top-32 -left-40"></div>
+                <div class="absolute w-[700px] h-[700px] bg-[#3e0cdf]/40 rounded-full blur-3xl bg-orb-slow bottom-20 right-0"></div>
             </div>
 
-            <!-- Project Ignite -->
-            <div>
-                <div class="h-64 rounded-lg overflow-hidden border border-[#c37b09]"
-                     style="background-image: url('https://i.imgur.com/0ZxWIBR.png'); background-size: cover; background-position: center;">
+            <!-- İçərik -->
+            <div class="relative z-10 container mx-auto px-6 lg:px-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                    <!-- Vizuallıq Sahəsi (Düzəldilmiş şəkil ölçüsü və nisbəti) -->
+                    <div class="flex items-center justify-center rounded-2xl aspect-square md:aspect-[4/3] border border-[#c37b09]/60 bg-white/5 backdrop-blur-md shadow-lg overflow-hidden bg-cover bg-center"
+                         style="background-image: url('https://i.imgur.com/dkY8zWq.png');">
+                    </div>
+
+                    <!-- Mətn Sahəsi -->
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+                            Yaradıcı Oyanış.
+                        </h2>
+                        <p class="text-lg text-gray-200 mb-8 leading-relaxed">
+                            Intibach Creative brendlərin mahiyyətini kəşf etmələrinə və potensiallarını tam şəkildə üzə çıxarmalarına kömək edən rəqəmsal agentlikdir. "Oyanış" fəlsəfəmizlə biz yaradıcılığı və strategiyanı birləşdirərək unudulmaz brendlər yaradırıq.
+                        </p>
+
+                        <!-- Missiya & Vizyon Qutuları (Mətn daşmasının qarşısı alındı - h-auto) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div class="bg-white/10 p-6 rounded-xl border border-white/20 backdrop-blur-md hover:scale-105 transition-all duration-500 h-auto">
+                                <h3 class="text-2xl font-semibold text-[#c37b09] mb-2">Missiyamız</h3>
+                                <p class="text-gray-300 text-sm sm:text-base">
+                                    Brendlərə kim olduqlarını və nəyi təmsil etdiklərini xatırladaraq, hədəf kütlələri ilə dərin bağlar qurmaları üçün güc vermək.
+                                </p>
+                            </div>
+
+                            <div class="bg-white/10 p-6 rounded-xl border border-white/20 backdrop-blur-md hover:scale-105 transition-all duration-500 h-auto">
+                                <h3 class="text-2xl font-semibold text-[#3e0cdf] mb-2">Vizyonumuz</h3>
+                                <p class="text-gray-300 text-sm sm:text-base">
+                                    Rəqəmsal dünyada sadəcə mövcud olan deyil, həm də ilham verən və gələcəyi formalaşdıran brendlər inşa etmək.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <h3 class="text-2xl font-semibold mt-4">Project Ignite</h3>
-                <p class="text-gray-300 mt-2">
-                    Social media campaign and content strategy for a disruptive e-commerce brand.
-                </p>
-                <a href="#" class="text-[#c37b09] font-semibold inline-block mt-2 hover:underline">
-                    View Project →
-                </a>
+            </div>
+        </section>
+
+        <!-- ===== 3. XİDMƏTLƏRİMİZ ===== -->
+        <section id="services" class="pt-40 pb-24 md:py-48 bg-black grainy">
+
+            <!-- 🌌 Arka Plan (Qradiyent + Blur + Animasiya) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#3e0cdf] via-[#2e0854] to-[#c37b09] opacity-90"></div>
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute w-[600px] h-[600px] bg-[#c37b09]/40 rounded-full blur-3xl bg-orb -top-20 -left-40"></div>
+                <div class="absolute w-[700px] h-[700px] bg-[#3e0cdf]/40 rounded-full blur-3xl bg-orb-slow bottom-20 right-0"></div>
             </div>
 
-            <!-- Project Echo -->
-            <div>
-                <div class="h-64 rounded-lg overflow-hidden border border-[#c37b09]"
-                     style="background-image: url('https://i.imgur.com/G64uk9n.png'); background-size: cover; background-position: center;">
-                </div>
-                <h3 class="text-2xl font-semibold mt-4">Project Echo</h3>
-                <p class="text-gray-300 mt-2">
-                    Minimalist web design and video production for an independent artist collective.
-                </p>
-                <a href="#" class="text-[#3e0cdf] font-semibold inline-block mt-2 hover:underline">
-                    View Project →
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-        <!-- ===== 5. CONTACT US ===== -->
-        <section id="contact" class="py-24 md:py-32 bg-black grainy">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Başlık -->
+            <!-- 🌟 İçərik -->
+            <div class="relative z-10 container mx-auto px-6 lg:px-12">
+                <!-- Başlıq -->
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                        Ready for Your Brand's Awakening?
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                        Brendinizi Oyatmaq Sənəti.
                     </h2>
-                    <p class="text-lg text-gray-400">
-                        Share your project with us. Let's unleash its potential together.
+                    <p class="text-lg text-gray-300">
+                        Brendinizin unikal hekayəsini həyata keçirmək üçün nəzərdə tutulmuş tam yaradıcı xidmətlər paketi təklif edirik.
                     </p>
                 </div>
 
-                <!-- İletişim Formu -->
-                <form class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Xidmət Kartları -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Kart 1 -->
+                    <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#c37b09] transition-colors">
+                            Brend Strategiyası & Kimliyi
+                        </h3>
+                        <p class="text-gray-300">
+                            Rezonans yaradan bir brend qurmaq üçün əsas mesajınızı, səs tonunuzu və vizual kimliyinizi müəyyənləşdiririk.
+                        </p>
+                    </div>
+
+                    <!-- Kart 2 -->
+                    <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#3e0cdf] transition-colors">
+                            Veb Dizayn
+                        </h3>
+                        <p class="text-gray-300">
+                            Həm gözəl, həm də istifadəçi mərkəzli olan, tam brendinizə özəl vizual veb dizaynların hazırlanması.
+                        </p>
+                    </div>
+
+                    <!-- Kart 3 -->
+                    <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#c37b09] transition-colors">
+                            Rəqəmsal Marketinq & SMM
+                        </h3>
+                        <p class="text-gray-300">
+                            Hədəflənmiş rəqəmsal kampaniyalar vasitəsilə auditoriyanızı cəlb etmək və sosial şəbəkələrdə böyüməni təmin etmək.
+                        </p>
+                    </div>
+
+                    <!-- Kart 4 -->
+                    <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#3e0cdf] transition-colors">
+                            Kontent Yaradılması & Kopiraytinq
+                        </h3>
+                        <p class="text-gray-300">
+                            Brendinizin hekayəsini təsirli, unikal mətnlər, fotoqrafiya və kreativ dizayn ideyaları ilə insanlara çatdırmaq.
+                        </p>
+                    </div>
+
+                    <!-- Kart 5 -->
+                    <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#c37b09] transition-colors">
+                            Video Editing
+                        </h3>
+                        <p class="text-gray-300">
+                            Videolarınızın peşəkar şəkildə kəsilməsi, rəng tənzimləmələri, səs montajı və dinamik effektlərlə zənginləşdirilməsi.
+                        </p>
+                    </div>
+
+                    <!-- Kart 6 -->
+                    <div class="group bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                        <h3 class="text-2xl font-semibold text-white mb-3 group-hover:text-[#3e0cdf] transition-colors">
+                            PR
+                        </h3>
+                        <p class="text-gray-300">
+                            Brendinizin mediada düzgün təmsil olunması, ictimaiyyət arasında nüfuzunun artırılması və effektiv kommunikasiya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <style>
+                /* 🔮 Daha axıcı, yavaş qradiyent animasiyası və GPU optimallaşdırılması */
+                @keyframes smoothMove {
+                    0% {
+                        transform: translate3d(0, 0, 0) scale(1);
+                        opacity: 0.6;
+                    }
+                    50% {
+                        transform: translate3d(40px, -60px, 0) scale(1.1);
+                        opacity: 0.8;
+                    }
+                    100% {
+                        transform: translate3d(0, 0, 0) scale(1);
+                        opacity: 0.6;
+                    }
+                }
+
+                .bg-orb {
+                    animation: smoothMove 15s ease-in-out infinite;
+                    will-change: transform;
+                    backface-visibility: hidden;
+                }
+
+                .bg-orb-slow {
+                    animation: smoothMove 25s ease-in-out infinite;
+                    will-change: transform;
+                    backface-visibility: hidden;
+                }
+            </style>
+        </section>
+
+        <!-- ===== 4. PORTFOLİO / İŞLƏRİMİZ ===== -->
+        <!-- background-attachment daxildə deyil, responsive Tailwind klasları ilə verilir ki, mobildə "fixed" ləğv olunsun -->
+        <section id="portfolio" class="py-24 md:py-32 relative bg-gray-900 text-white bg-scroll md:bg-fixed bg-cover bg-center" 
+                 style="background-image: url('https://i.imgur.com/2LHK0YW.png');">
+            <div class="absolute inset-0 bg-black/70"></div> <!-- Qaranlıq overlay -->
+            
+            <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Başlıq -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                        Hekayələrimiz. Uğurlarımız.
+                    </h2>
+                    <p class="text-lg text-gray-300">
+                        Hər bir layihədə brendlərin daxili gücünü necə oyatdığımızı kəşf edin.
+                    </p>
+                </div>
+                
+                <!-- Portfoliokartları (Yenilənmiş Layihə Adları) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <!-- Project 1: ShebekeFilmFest -->
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                        <input type="text" id="name" name="name" required
-                               class="w-full px-4 py-3 rounded-md bg-gray-900 text-white border-2 border-gray-700 focus:border-purple-500 focus:ring-purple-500 outline-none">
+                        <div class="h-64 rounded-lg overflow-hidden border border-[#c37b09] bg-cover bg-center"
+                             style="background-image: url('https://i.imgur.com/dkY8zWq.png');">
+                        </div>
+                        <h3 class="text-2xl font-semibold mt-4">ShebekeFilmFest</h3>
+                        <p class="text-gray-300 mt-2 text-sm sm:text-base">
+                            Filmlər festivalı üçün tam brend kimliyi, vizual tərtibat və rəqəmsal platformanın qurulması.
+                        </p>
+                        <a href="#" class="text-[#3e0cdf] font-semibold inline-block mt-2 hover:underline">
+                            Layihəyə baxın →
+                        </a>
                     </div>
+
+                    <!-- Project 2: Edubridge.az -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                        <input type="email" id="email" name="email" required
-                               class="w-full px-4 py-3 rounded-md bg-gray-900 text-white border-2 border-gray-700 focus:border-purple-500 focus:ring-purple-500 outline-none">
+                        <div class="h-64 rounded-lg overflow-hidden border border-[#c37b09] bg-cover bg-center"
+                             style="background-image: url('https://i.imgur.com/0ZxWIBR.png');">
+                        </div>
+                        <h3 class="text-2xl font-semibold mt-4">Edubridge.az</h3>
+                        <p class="text-gray-300 mt-2 text-sm sm:text-base">
+                            Müasir təhsil portalı üçün rəqəmsal marketinq, sosial media idarəçiliyi və kontent strategiyası.
+                        </p>
+                        <a href="https://www.edubridge.az/" class="text-[#c37b09] font-semibold inline-block mt-2 hover:underline">
+                            Layihəyə baxın →
+                        </a>
                     </div>
-                    <div class="md:col-span-2">
-                        <label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Phone (Optional)</label>
-                        <input type="tel" id="phone" name="phone"
-                               class="w-full px-4 py-3 rounded-md bg-gray-900 text-white border-2 border-gray-700 focus:border-purple-500 focus:ring-purple-500 outline-none">
+
+                    <!-- Project 3: Project Echo -->
+                    <div>
+                        <div class="h-64 rounded-lg overflow-hidden border border-[#c37b09] bg-cover bg-center"
+                             style="background-image: url('https://i.imgur.com/G64uk9n.png');">
+                        </div>
+                        <h3 class="text-2xl font-semibold mt-4">Project Echo</h3>
+                        <p class="text-gray-300 mt-2 text-sm sm:text-base">
+                            Müstəqil rəssamlar birliyi üçün minimalist veb dizaynı və video istehsalı.
+                        </p>
+                        <a href="#" class="text-[#3e0cdf] font-semibold inline-block mt-2 hover:underline">
+                            Layihəyə baxın →
+                        </a>
                     </div>
-                    <div class="md:col-span-2">
-                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" required
-                                  class="w-full px-4 py-3 rounded-md bg-gray-900 text-white border-2 border-gray-700 focus:border-purple-500 focus:ring-purple-500 outline-none"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 5. ƏLAQƏ ===== -->
+        <section id="contact" class="py-24 md:py-32 bg-black grainy">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Başlıq -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                        Brendinizin Oyanışına Hazırsınız?
+                    </h2>
+                    <p class="text-lg text-gray-400">
+                        Layihənizi bizimlə paylaşın. Potensialınızı birlikdə ortaya çıxaraq.
+                    </p>
+                </div>
+
+                <!-- Yenilənmiş Əlaqə Vasitələri (Mesaj göndərmək hissəsi çıxarıldı) -->
+                <div class="max-w-2xl mx-auto bg-gradient-to-r from-[#3e0cdf]/20 to-[#c37b09]/20 p-8 sm:p-12 rounded-2xl border-2 border-[#3e0cdf]/50 backdrop-blur-md shadow-2xl text-center">
+                    <p class="text-gray-400 mb-2">Bizimlə birbaşa əlaqə saxlayın:</p>
+                    <a href="mailto:contact@intibach.com" class="text-2xl sm:text-3xl text-white font-extrabold hover:text-[#3e0cdf] transition-colors duration-300 block mb-4">
+                        contact@intibach.com
+                    </a>
+                    
+                    <!-- Yenilənmiş Telefon Nömrəsi -->
+                    <a href="tel:+994559593905" class="text-xl sm:text-2xl text-white font-semibold hover:text-[#c37b09] transition-colors duration-300 block mb-8">
+                        +994 55 959 39 05
+                    </a>
+
+                    <div class="flex justify-center space-x-6">
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/intibachagency/" target="_blank" class="text-gray-400 hover:text-[#c37b09] transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+                                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm4.25-.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z" />
+                            </svg>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/company/intibach" target="_blank" class="text-gray-400 hover:text-[#3e0cdf] transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+                                <path d="M19 3A2.993 2.993 0 0 1 22 6v12a2.993 2.993 0 0 1-3 3H5a2.993 2.993 0 0 1-3-3V6a2.993 2.993 0 0 1 3-3h14zM8.337 17v-7.019H5.777V17h2.56zM7.057 8.685a1.482 1.482 0 1 0-.03-2.965 1.482 1.482 0 0 0 .03 2.965zM18.222 17v-3.598c0-1.925-1.03-2.821-2.404-2.821-1.11 0-1.611.61-1.893 1.04v-0.89h-2.56c.033.588 0 6.269 0 6.269h2.56v-3.501c0-.187.014-.374.069-.507.15-.374.493-.76 1.068-.76.753 0 1.054.573 1.054 1.412V17h2.56z" />
+                            </svg>
+                        </a>
+
+                        <!-- Facebook -->
+                        <a href="https://facebook.com/intibach" target="_blank" class="text-gray-400 hover:text-[#c37b09] transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+                                <path d="M22 12a10 10 0 1 0-11.5 9.87v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.63-1.3 1.27V11h2.3l-.37 3h-1.93v7A10 10 0 0 0 22 12z" />
+                            </svg>
+                        </a>
                     </div>
-                    <div class="md:col-span-2 text-center">
-                        <button type="submit"
-    class="btn bg-transparent border-2 border-[#3e0cdf] text-[#3e0cdf] font-semibold px-8 py-3 rounded-lg hover:bg-[#c37b09] hover:border-[#c37b09] hover:text-white transition-colors duration-300 ease-in-out">
-    Send Message
-</button>
-
-                    </div>
-                </form>
-
-                <!-- İletişim Bilgileri ve Sosyal Medya -->
-               <!-- İletişim Bilgileri ve Sosyal Medya -->
-<div class="text-center mt-16">
-  <p class="text-gray-400">or reach us at</p>
-  <a href="mailto:contact@intibach.com" class="text-xl text-white font-semibold hover:text-[#3e0cdf] transition-colors">
-    contact@intibach.com
-  </a>
-
-  <div class="flex justify-center space-x-6 mt-8">
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/intibachagency/" target="_blank" class="text-gray-500 hover:text-[#c37b09] transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24">
-        <path
-          d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm4.25-.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z" />
-      </svg>
-    </a>
-
-    <!-- LinkedIn -->
-    <a href="https://linkedin.com/company/intibach" target="_blank" class="text-gray-500 hover:text-[#3e0cdf] transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24">
-        <path
-          d="M19 3A2.993 2.993 0 0 1 22 6v12a2.993 2.993 0 0 1-3 3H5a2.993 2.993 0 0 1-3-3V6a2.993 2.993 0 0 1 3-3h14zM8.337 17v-7.019H5.777V17h2.56zM7.057 8.685a1.482 1.482 0 1 0-.03-2.965 1.482 1.482 0 0 0 .03 2.965zM18.222 17v-3.598c0-1.925-1.03-2.821-2.404-2.821-1.11 0-1.611.61-1.893 1.04v-0.89h-2.56c.033.588 0 6.269 0 6.269h2.56v-3.501c0-.187.014-.374.069-.507.15-.374.493-.76 1.068-.76.753 0 1.054.573 1.054 1.412V17h2.56z" />
-      </svg>
-    </a>
-
-    <!-- Facebook -->
-    <a href="https://facebook.com/intibach" target="_blank" class="text-gray-500 hover:text-[#c37b09] transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24">
-        <path
-          d="M22 12a10 10 0 1 0-11.5 9.87v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.63-1.3 1.27V11h2.3l-.37 3h-1.93v7A10 10 0 0 0 22 12z" />
-      </svg>
-    </a>
-  </div>
-</div>
-
+                </div>
             </div>
         </section>
     </main>
@@ -544,89 +500,57 @@
                 
                 <!-- Telif Hakkı -->
                 <p class="text-sm text-gray-400">
-                    &copy; 2025 İntibach Creative Agency. All rights reserved.
+                    &copy; 2026 İntibach Creative Agency. Bütün hüquqlar qorunur.
                 </p>
                 
                 <!-- Linkler -->
                 <div class="flex space-x-6">
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">Site Map</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">Məxfilik Siyasəti</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">Sayt Xəritəsi</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- JS Skriptləri (Mobil menyu və sürüşmə fəaliyyətləri) -->
     <script>
-        // Mobil Menü Fonksiyonu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
+        // Səhifədəki animasiyalı elementləri seç (Daha az elementi izləyərək mobil prosessoru yüngülləşdiririk)
+        const animatedElements = document.querySelectorAll(
+            '.fade-in, .text-focus-in, .group, .grid > div, h2'
+        );
 
-        function toggleMenu() {
-            mobileMenu.classList.toggle('hidden');
-            // Menü açıkken sayfanın kaymasını engelle
-            if (!mobileMenu.classList.contains('hidden')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Görünür olduqda animasiyanı aktiv et
+                        entry.target.classList.add('animate-visible');
+                    } else {
+                        // Görünüşdən çıxdıqda yenidən gizlət
+                        entry.target.classList.remove('animate-visible');
+                    }
+                });
+            },
+            { 
+                threshold: 0.1, // Element ekranın 10%-nə daxil olan kimi tez aktivləşir
+                rootMargin: "0px 0px 50px 0px" // Element ekrana gəlməzdən 50px əvvəl yüklənir (daha hamar keçid)
             }
-        }
+        );
 
-        // Menü butonuna tıklama olayı
-        menuBtn.addEventListener('click', toggleMenu);
-
-        // Mobil menüdeki bir linke tıklandığında menüyü kapat
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // Navigasyon barının kaydırıldığında arka planını değiştirme
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('backdrop-blur-custom');
-            } else {
-                header.classList.remove('backdrop-blur-custom');
-            }
+        // Başlanğıcda görünməz et
+        animatedElements.forEach(el => {
+            el.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-500', 'ease-out');
+            observer.observe(el);
         });
     </script>
 
-    <script>
-  // Sayfadaki animasyonlu elemanları seç
-  const animatedElements = document.querySelectorAll(
-    '.fade-in, .text-focus-in, .service-card, .portfolio-card, h2, h3, p'
-  );
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Görünür olunca animasyonu aktif et
-          entry.target.classList.add('animate-visible');
-        } else {
-          // Görünümden çıkınca tekrar gizle (yukarı kaydırınca yeniden çalışır)
-          entry.target.classList.remove('animate-visible');
+    <style>
+        /* Görünür olduqda animasiya ilə daxil olsun */
+        .animate-visible {
+            opacity: 1 !important;
+            transform: translate3d(0, 0, 0) !important;
         }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  // Başlangıçta görünmez yap
-  animatedElements.forEach(el => {
-    el.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-700', 'ease-out');
-    observer.observe(el);
-  });
-</script>
-
-<style>
-  /* Görünür olunca animasyonla içeri gelsin */
-  .animate-visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-</style>
-
+    </style>
 
 </body>
 </html>
